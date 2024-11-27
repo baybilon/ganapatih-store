@@ -9,11 +9,7 @@ import { Category } from "../../types";
 interface MainNavProps {
     data: Category[]
 };
-
-interface MainNavProps {
-    data: Category[]
-  }
-  
+ 
   const MainNav: React.FC<MainNavProps> = ({ data }) => {
     const pathname = usePathname();
   

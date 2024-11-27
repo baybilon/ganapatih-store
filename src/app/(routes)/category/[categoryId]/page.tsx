@@ -9,6 +9,7 @@ import ProductCard from "@/components/ui/product-card";
 
 import Filter from "./components/filter";
 import MobileFilter from "./components/mobile-filter";
+import { use } from "react";
 
 
 
@@ -18,6 +19,11 @@ interface CategoryPageProps {
     params : {
         categoryId : string
     };
+
+    // params : {
+    //     params: Promise<{categoryId:string}>
+    // };
+
     searchParams : {
         colorId : string;
         sizeId : string;
@@ -28,16 +34,26 @@ const CategoryPage : React.FC<CategoryPageProps> = async ({
     params,
     searchParams,
 }) => {
+    
+    // const {categoryId} = use(params);
+    const { categoryId } = params;
+    const { colorId, sizeId } = searchParams;
 
     const products = await getProducts({
-        categoryId : params.categoryId,
-        colorId : searchParams.colorId,
-        sizeId : searchParams.sizeId,        
+        // categoryId : params.categoryId,
+        // colorId : searchParams.colorId,
+        // sizeId : searchParams.sizeId,
+        
+        categoryId,
+        colorId,
+        sizeId
+        
     });
 
     const sizes = await getSizes();
     const colors = await getColors();
-    const category = await getCategory(params.categoryId);
+    const category = await getCategory(categoryId);
+
 
     return ( 
         <div className="bg-white">
